@@ -1,0 +1,27 @@
+{% comment %} =======================Add below code in this [ "m-cart__subtotal" ] div {% endcomment %}
+{% comment %} ###########Threshold bar###########{% endcomment %}
+            
+            <div class="main-shippingbar" data-range="1000" style="margin: 15px 0;">
+              {% assign shipping = 1000 %}
+              {% assign cart_value = cart.total_price | divided_by: 100 %}
+              {% assign bar_width = cart_value | times: 100 | divided_by: shipping %}
+              {% if cart_value > shipping %}
+                {% assign bar_width = 100 %}
+              {% endif %}
+              {% if cart_value > shipping %}
+                <div class="head-text"><h6>reached</h6></div>
+              {% elsif cart_value == shipping %}
+                <div class="head-text"><h6>equal</h6></div>
+              {% else %}
+                <div class="head-text" data-cart-subtotal-price>
+                  <h6>You're only {{ shipping | minus: cart.total_price | money }} away from free shipping.</h6>
+                </div>
+              {% endif %}
+              <div class="html_container" style="background-color: #e5e5e5;height: 5px;">
+                <div
+                  class="bar html money"
+                  style="width: {{ bar_width }}%; background-color: #ffbc11;height: 5px;"
+                ></div>
+              </div>
+            </div>
+             {% comment %} ###########End Threshold bar###########{% endcomment %}
